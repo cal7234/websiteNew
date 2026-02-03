@@ -1,0 +1,352 @@
+/*
+game.js for Perlenspiel 3.3.x
+Last revision: 2022-03-15 (BM)
+
+Perlenspiel is a scheme by Professor Moriarty (bmoriarty@wpi.edu).
+This version of Perlenspiel (3.3.x) is hosted at <https://ps3.perlenspiel.net>
+Perlenspiel is Copyright © 2009-22 Brian Moriarty.
+This file is part of the standard Perlenspiel 3.3.x devkit distribution.
+
+Perlenspiel is free software: you can redistribute it and/or modify
+it under the terms of the GNU Lesser General Public License as published
+by the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+Perlenspiel is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU Lesser General Public License for more details.
+
+You may have received a copy of the GNU Lesser General Public License
+along with the Perlenspiel devkit. If not, see <http://www.gnu.org/licenses/>.
+*/
+
+/*
+This JavaScript file is a template for creating new Perlenspiel 3.3.x games.
+Any unused event-handling function templates can be safely deleted.
+Refer to the tutorials and documentation at <https://ps3.perlenspiel.net> for details.
+*/
+
+/*
+The following comment lines are for JSHint <https://jshint.com>, a tool for monitoring code quality.
+You may find them useful if your development environment is configured to support JSHint.
+If you don't use JSHint (or are using it with a configuration file), you can safely delete these two lines.
+*/
+
+/* jshint browser : true, devel : true, esversion : 6, freeze : true */
+/* globals PS : true */
+
+"use strict"; // Do NOT remove this directive!
+
+/*
+
+PS.init( system, options )
+Called once after engine is initialized but before event-polling begins.
+This function doesn't have to do anything, although initializing the grid dimensions with PS.gridSize() is recommended.
+If PS.grid() is not called, the default grid dimensions (8 x 8 beads) are applied.
+Any value returned is ignored.
+[system : Object] = A JavaScript object containing engine and host platform information properties; see API documentation for details.
+[options : Object] = A JavaScript object with optional data properties; see API documentation for details.
+*/
+var Words= ["dog","cat","smile","rainbow","sun","Hamburger"];
+
+function ranWord(){
+	var index= Math.floor(Math.random()*Words.length);
+	return Words[index];
+}
+PS.init = function( system, options ) {
+	// Uncomment the following code line
+	// to verify operation:
+
+	 PS.debug( "PS.init() called\n" );
+
+	// This function should normally begin
+	// with a call to
+    //PS.gridSize( 8, 8 )
+	// where x and y are the desired initial
+	// dimensions of the grid.
+	// Call
+    //FIRST to avoid problems!
+    PS.gridSize()
+	// The sample call below sets the grid to the
+	// default dimensions (8 x 8).
+	// Uncomment the following code line and change
+	// the x and y parameters as needed.
+
+	PS.gridSize( 8, 8 );
+
+	// This is also a good place to display
+	// your game title or a welcome message
+	// in the status line above the grid.
+	// Uncomment the following code line and
+	// change the string parameter as needed.
+
+	PS.statusText( "welcome to my Game" );
+
+	// Add any other initialization code you need here.
+    //ADD ANYTHING HERE TO MAKE CUTE
+};
+PS.keyDown = function(key, shift, ctrl, options) {
+	if (key === PS.KEY_UP || key === PS.KEY_DOWN || key === PS.KEY_LEFT || key === PS.KEY_RIGHT) {
+
+
+
+		PS.statusText("Draw this: " + ranWord());
+
+	}};
+/*
+PS.touch ( x, y, data, options )
+Called when the left mouse button is clicked over bead(x, y), or when bead(x, y) is touched.
+This function doesn't have to do anything. Any value returned is ignored.
+[x : Number] = zero-based x-position (column) of the bead on the grid.
+[y : Number] = zero-based y-position (row) of the bead on the grid.
+[data : *] = The JavaScript value previously associated with bead(x, y) using PS.data(); default = 0.
+[options : Object] = A JavaScript object with optional data properties; see API documentation for details.
+*/
+
+//PS.touch = function( x, y, data, options ) {
+	// Uncomment the following code line
+	// to inspect x/y parameters:
+
+	// PS.debug( "PS.touch() @ " + x + ", " + y + "\n" );
+
+	// Add code here for mouse clicks/touches
+	// over a bead.
+//};
+PS.init = function( system, options ) {
+	PS.gridSize( 16, 16 );
+	PS.statusText( "PS.color() Demo" );
+};
+PS.touch = function( x, y, data, options ) {
+	"use strict";
+
+	if ( y < PAINT.PALETTE_ROW )
+	{
+		PAINT.dragging = true;
+		PAINT.underColor = PAINT.color;
+		PS.color( x, y, PAINT.color );
+	}
+};
+/*
+PS.release ( x, y, data, options )
+Called when the left mouse button is released, or when a touch is lifted, over bead(x, y).
+This function doesn't have to do anything. Any value returned is ignored.
+[x : Number] = zero-based x-position (column) of the bead on the grid.
+[y : Number] = zero-based y-position (row) of the bead on the grid.
+[data : *] = The JavaScript value previously associated with bead(x, y) using PS.data(); default = 0.
+[options : Object] = A JavaScript object with optional data properties; see API documentation for details.
+*/
+
+PS.release = function( x, y, data, options ) {
+	// Uncomment the following code line to inspect x/y parameters:
+
+	// PS.debug( "PS.release() @ " + x + ", " + y + "\n" );
+
+	// Add code here for when the mouse button/touch is released over a bead.
+};
+
+/*
+PS.enter ( x, y, button, data, options )
+Called when the mouse cursor/touch enters bead(x, y).
+This function doesn't have to do anything. Any value returned is ignored.
+[x : Number] = zero-based x-position (column) of the bead on the grid.
+[y : Number] = zero-based y-position (row) of the bead on the grid.
+[data : *] = The JavaScript value previously associated with bead(x, y) using PS.data(); default = 0.
+[options : Object] = A JavaScript object with optional data properties; see API documentation for details.
+*/
+
+PS.enter = function( x, y, data, options ) {
+	// Uncomment the following code line to inspect x/y parameters:
+
+	// PS.debug( "PS.enter() @ " + x + ", " + y + "\n" );
+
+	// Add code here for when the mouse cursor/touch enters a bead.
+};
+
+/*
+PS.exit ( x, y, data, options )
+Called when the mouse cursor/touch exits bead(x, y).
+This function doesn't have to do anything. Any value returned is ignored.
+[x : Number] = zero-based x-position (column) of the bead on the grid.
+[y : Number] = zero-based y-position (row) of the bead on the grid.
+[data : *] = The JavaScript value previously associated with bead(x, y) using PS.data(); default = 0.
+[options : Object] = A JavaScript object with optional data properties; see API documentation for details.
+*/
+
+PS.exit = function( x, y, data, options ) {
+	// Uncomment the following code line to inspect x/y parameters:
+
+	// PS.debug( "PS.exit() @ " + x + ", " + y + "\n" );
+
+	// Add code here for when the mouse cursor/touch exits a bead.
+};
+
+/*
+PS.exitGrid ( options )
+Called when the mouse cursor/touch exits the grid perimeter.
+This function doesn't have to do anything. Any value returned is ignored.
+[options : Object] = A JavaScript object with optional data properties; see API documentation for details.
+*/
+
+PS.exitGrid = function( options ) {
+	// Uncomment the following code line to verify operation:
+
+	// PS.debug( "PS.exitGrid() called\n" );
+
+	// Add code here for when the mouse cursor/touch moves off the grid.
+};
+
+/*
+/*
+
+Called when a key on the keyboard is pressed.
+This function doesn't have to do anything. Any value returned is ignored.
+[key : Number] = ASCII code of the released key, or one of the PS.KEY_* constants documented in the API.
+[shift : Boolean] = true if shift key is held down, else false.
+[ctrl : Boolean] = true if control key is held down, else false.
+[options : Object] = A JavaScript object with optional data properties; see API documentation for details.
+*/
+
+
+
+
+var PAINT = {
+
+	// CONSTANTS
+	// Constant names are all upper-case to make them easy to distinguish
+
+	WIDTH: 16, // width of grid
+	HEIGHT: 17, // height of grid (one extra row for palette)
+	PALETTE_ROW: 16, // row occupied by palette
+	WHITE: 8, // x-position of white in palette
+	ERASE_X: 15, // x-position of X in palette
+
+	// The palette colors, scientifically chosen! :)
+
+	COLORS: [
+		0xFF0000, 0xFF8000, 0xFFFF00, 0x00C000, 0x00FFFF,
+		0x4040FF, 0x8040FF, 0xFF00FF, 0xFFFFFF, 0xC0C0C0,
+		0xA0A0A0, 0x808080, 0x606060, 0x404040, 0x000000
+	],
+
+	// VARIABLES
+	// Variable names are lower-case with camelCaps
+
+	current: 8, // x-pos of current palette selection
+	color: PS.COLOR_WHITE, // color of current palette selection
+	underColor: PS.COLOR_WHITE, // color of bead under the brush
+	dragging: false, // true if dragging brush
+	prompt: false, // true if instructions displayed
+
+	// FUNCTIONS
+	// Function names are lower case with camelCaps
+
+	// PAINT.select ( x, y, data )
+	// Selects a new color for painting
+
+	select : function ( x, y, data ) {
+		"use strict";
+
+		// activate border if changing selection
+
+		if ( x !== PAINT.current )	{
+			PS.border(PAINT.current, PAINT.HEIGHT - 1, 0); // turn off previous border
+			PS.border( x, y, 2 );
+			PAINT.current = x;
+			PAINT.color = data; // set current color from color stored in bead data
+			PS.audioPlay( "fx_click" );
+		}
+	},
+
+	// PAINT.reset ()
+	// Clears the canvas, except the bottom row
+
+	reset : function () {
+		"use strict";
+		var i;
+
+		PAINT.dragging = false;
+		PAINT.underColor = PS.COLOR_WHITE;
+		for ( i = 0; i < PAINT.PALETTE_ROW; i += 1 )	{
+			PS.color( PS.ALL, i, PS.COLOR_WHITE );
+		}
+		PS.audioPlay( "fx_pop" );
+	}
+};
+PS.init = function( system, options ) {
+	"use strict";
+	var i, lastx, lasty, color;
+
+	PS.gridSize( PAINT.WIDTH, PAINT.HEIGHT );
+	PS.gridColor( 0x303030 );
+	PS.border( PS.ALL, PS.ALL, 0 ); // disable all borders
+
+	// Load and lock sounds
+
+	PS.audioLoad( "fx_click", { lock : true } );
+	PS.audioLoad( "fx_pop", { lock : true } );
+
+	// Draw palette
+
+	lastx = PAINT.WIDTH - 1;
+	lasty = PAINT.PALETTE_ROW; // faster if saved in local var
+	for ( i = 0; i < lastx; i += 1 ) {
+		color = PAINT.COLORS[ i ];
+		PS.color( i, lasty, color ); // set visible color
+		PS.data( i, lasty, color ); // also store color as bead data
+		PS.exec( i, lasty, PAINT.select ); // call PAINT.select when clicked
+
+		// Set border color according to palette position
+
+		if ( i < 12 )
+		{
+			color = 0x000000; // black for light colors
+		}
+		else
+		{
+			color = 0xC0C0C0; // light gray for dark colors
+		}
+		PS.borderColor( i, lasty, color );
+	}
+
+	// Set up reset button
+
+	PAINT.ERASE_X = lastx; // remember the x-position
+	PS.glyphColor( lastx, lasty, PS.COLOR_BLACK );
+	PS.glyph( lastx, lasty, "X" );
+	PS.exec( lastx, lasty, PAINT.reset ); // call PAINT.Reset when clicked
+
+	// Start with white selected
+
+	PS.border( PAINT.WHITE, PAINT.PALETTE_ROW, 2 );
+	PAINT.current = PAINT.WHITE;
+	PAINT.color = PS.COLOR_WHITE;
+
+	PAINT.reset();
+	PS.statusColor( PS.COLOR_WHITE );
+	PS.statusText( "Draw a: "+ranWord() +"|| press -> for new word" );
+	PS.border( PS.ALL, PS.ALL, 1 );
+	PS.borderColor( PS.ALL, PS.ALL, 0x404040 );
+
+
+/*
+PS.input ( sensors, options )
+Called when a supported input device event (other than those above) is detected.
+This function doesn't have to do anything. Any value returned is ignored.
+[sensors : Object] = A JavaScript object with properties indicating sensor status; see API documentation for details.
+[options : Object] = A JavaScript object with optional data properties; see API documentation for details.
+NOTE: Currently, only mouse wheel events are reported, and only when the mouse cursor is positioned directly over the grid.
+*/
+
+PS.input = function( sensors, options ) {
+	// Uncomment the following code lines to inspect first parameter:
+
+//	 var device = sensors.wheel; // check for scroll wheel
+//
+//	 if ( device ) {
+//	   PS.debug( "PS.input(): " + device + "\n" );
+//	 }
+
+	// Add code here for when an input event is detected.
+}}
+
